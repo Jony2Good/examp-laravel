@@ -54,7 +54,7 @@ class PostController extends BaseController
         echo $post->content;
     }
 
-    public function delete()
+    public function delete($id)
     {
         $post = Post::find(2);
         if(isset($post)) {
@@ -68,6 +68,23 @@ class PostController extends BaseController
     {
        Post::withTrashed()->find($id)->restore();
 
+    }
+
+    public function firstOrCreate()
+    {
+        $b = "image-" . mt_rand(1, 200) . ".png";
+        $c = mt_rand(1, 200);
+
+        $arr = [
+            'title' => fake()->name(),
+            'content' => fake()->text(),
+            'image' => $b,
+            'likes' => $c,
+            'is_published' => 1,
+        ];
+
+       $post = Post::updateOrCreate([ 'image' => $b ], $arr);
+       dump($post->id);
     }
 
 }
