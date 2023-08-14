@@ -4,10 +4,9 @@ namespace Database\Factories;
 
 use App\Models\Author;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Article>
  */
 class ArticleFactory extends Factory
 {
@@ -20,21 +19,10 @@ class ArticleFactory extends Factory
     {
         return [
             'author_id' => Author::all()->random()->id,
-            'title' => fake()->unique()->sentence,
-            'content' => fake()->paragraphs(8,true),
-            'author' => fake()->unique()->name(),
-            'price' => fake()->randomNumber(1,100),
-            'active' => fake()->boolean(),
+            'title' => fake()->unique()->sentence(1),
+            'description' => fake()->paragraphs(8, true),
+            'published' => fake()->boolean(),
+            'price' => fake()->randomNumber(1, 100),
         ];
-    }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
     }
 }

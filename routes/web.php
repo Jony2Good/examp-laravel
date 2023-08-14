@@ -32,6 +32,6 @@ Route::get('/posts/update', [PostController::class, 'update']);
 Route::get('/posts/delete', [PostController::class, 'delete']);
 Route::get('/posts/first', [PostController::class, 'firstOrCreate']);
 Route::get('/posts/restore/{id}', [PostController::class, 'restore']);
-Route::get('/nextpage', [ArticleController::class, 'create']);
-Route::get('/show', [AuthorController::class, 'show']);
 
+Route::get('/article', [ArticleController::class, 'create']);
+Route::get('/author', [AuthorController::class, 'create']);
