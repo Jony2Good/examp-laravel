@@ -36,6 +36,44 @@ class ArticleController extends Controller
 //        echo Article::where('price', 7)->update(
 //           [  'price' => null ]
 //        );
+//        echo Article::whereDate('created_at', '2023-08-14')->get();
+
+//        $articles = Article::where('id', 3)->select('title')->get();
+//        $articles = Article::where('published', false)->get();
+
+//       $d =  $articles->filter(function($value) {
+//            return $value->price >= 9;
+//        });
+//        echo $d;
+//
+//        echo '<br>';
+//        echo '------';
+//        echo "<br>";
+//
+//
+//        $c =  Article::where('published', false)->get();
+//        $cd = $c->reject(function($value) {
+//            return $value->price <= 8;
+//        });
+//
+//        echo $cd;
+//        $d = $articles->map(function ($value) {
+//            return [
+//                'article_id' => $value->id,
+//                'article_title' => $value->title
+//            ];
+//
+//        });
+////       $d = $articles->only(["title"]);
+//        $a = $d->prepend(0, -1)->values()->except(0);
+//        print_r($a);
+//
+//        $articles = Article::pluck('title');
+//        echo $articles;
+        $articles = Article::where('id', 3)->get();
+        $d = $articles->put('title', 'New world of Fantazy');
+        print_r($d);
+
 
 
     }
