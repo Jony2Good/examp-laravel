@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    public function index()
+    {
+        $posts = $this->getData();
+        return view('posts.articles');
+    }
+
     public function create()
     {
 //        echo '<br>';

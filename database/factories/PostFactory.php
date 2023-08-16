@@ -17,9 +17,14 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $b = "image-" . mt_rand(1, 200) . ".png";
+
         return [
             'title' => fake()->name(),
             'content' => fake()->text(),
+            'image' => $b,
+            'likes' => fake()->randomNumber(1, 100),
+            'is_published' => fake()->boolean(),
 
         ];
     }
