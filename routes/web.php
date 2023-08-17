@@ -2,10 +2,14 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DateController;
 use App\Http\Controllers\FirstController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegistrationController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +24,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'home.index')->name('home');
+
+Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+Route::get('/registration', [RegistrationController::class, 'index'])->name('registration.index');
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{posts}', [BlogController::class, 'show'])->name('blog.show');
+
+
 
 Route::get('/first', [FirstController::class, 'index'])->name('first.index');
 Route::get('/main', [MainController::class, 'index'])->name('main.index');
