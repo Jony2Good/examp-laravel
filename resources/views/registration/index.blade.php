@@ -1,11 +1,55 @@
-@extends('layouts.base')
+@extends('layouts.auth')
+@section('page.title', 'Страница регистрации')
+@section('content.auth')
+    <x-card>
+        <x-card-container>
+            <x-card-header>
+                <x-card-title>
+                    {{__('Регистрация')}}
+                </x-card-title>
+                <ul class="social-links text-center">
+                    <li><a href=""><i class="fab fa-google"></i></a></li>
+                    <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                </ul>
+            </x-card-header>
+            <x-card-form action="{{ route('login.store') }}" method="post" class="form-horizontal">
+                 <x-form-item>
+                    <x-form-label required for="email1"> {{__('Адресс эл.почты')}}</x-form-label>
+                    <x-form-input id="email1" type="email" placeholder="эл.почта"/>
+                </x-form-item>
 
-@section('page.title')
-    Страница регистрации
+                <x-form-item>
+                    <x-form-label required for="name"> {{__('Логин')}}</x-form-label>
+                    <x-form-input id="name" type="name" placeholder="логин"/>
+                </x-form-item>
+
+                <x-form-item>
+                    <x-form-label required for="password1">{{__('Пароль')}}</x-form-label>
+                    <x-form-input id="password1" type="password" placeholder="пароль"/>
+                </x-form-item>
+
+                <x-form-item>
+                    <x-form-label required for="password_confirmation">{{__('Подтверждение пароля')}}</x-form-label>
+                    <x-form-input id="password_confirmation" type="password" placeholder="подтверждение пароль"/>
+                </x-form-item>
+                <x-form-item>
+                    <div class="form-check">
+                        <input id="privacy" name="privacy" type="checkbox" class="form-check-input">
+                        <label for="privacy" class="form-check-label h6">{{__('Я соглашаюсь с ')}}<a
+                                href="">{{__('условиями')}}</a> {{__('и')}} <a
+                                href="">{{__('приватной политикой сайта')}}</a></label>
+                    </div>
+                    <x-checkbox name="remember">
+                        {{ __("Запомнить меня") }}
+                    </x-checkbox>
+                </x-form-item>
+                <div class="text-center">
+                    <x-form-button>
+                        {{__('Войти')}}
+                    </x-form-button>
+                </div>
+            </x-card-form>
+        </x-card-container>
+    </x-card>
 @endsection
-
-    @section('content')
-        <h1 class="text-center pt-3">{{__('Страница регистрации')}}</h1>
-    @endsection
-
-

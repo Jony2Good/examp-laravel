@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home.index')->name('home');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+Route::post('/login/post', [LoginController::class, 'store'])->name('login.store');
 Route::get('/registration', [RegistrationController::class, 'index'])->name('registration.index');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
