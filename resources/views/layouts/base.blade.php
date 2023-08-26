@@ -11,6 +11,9 @@
 </head>
 <body>
 <style>
+    .reg-link {
+        font-size: 18px;
+    }
     .form-container{
         background-color: #fff;
         font-family: 'Poppins', sans-serif;

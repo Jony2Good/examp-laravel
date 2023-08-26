@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.index')
 
 @section('page.title')
    Главная страница

@@ -5,20 +5,21 @@
 @endsection
 
 @section('content')
-    <h1 class="text-center pt-3">{{__('Список постов')}}</h1>
 
-    <ul class="list-group">
-        @if (empty($posts))
-            <p class="text-danger text-center">Нет ни одного поста</p>
-        @else
-            @foreach($posts as $item)
-                <li class="list-group-item">
-                    <h5><a href="{{route('blog.show', $item->id)}}">{{$item->author}}</a></h5>
-                    <p>{{$item->content}}</p>
-                    <span>{{$item->id}}</span>
-                </li>
-            @endforeach
-        @endif
-    </ul>
-
+    <section>
+        <x-title>
+            {{__('Список постов')}}
+        </x-title>
+        <div class="container px-4">
+            <div class="row gx-5">
+                @if (empty($posts))
+                    <p class="text-danger text-center">{{ __('Нет ни одного поста') }}</p>
+                @else
+                    @foreach($posts as $item)
+                        <x-post.card :item="$item"/>
+                      @endforeach
+                @endif
+            </div>
+        </div>
+    </section>
 @endsection

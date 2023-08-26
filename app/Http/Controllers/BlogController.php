@@ -21,6 +21,7 @@ class BlogController extends Controller
 
     public function show(string $id)
     {
+
         return view('blog.show', ['id' => $id]);
     }
 }

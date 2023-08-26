@@ -24,6 +24,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+Route::get('/posts', [PostController::class, 'index'])->name('post.index');
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('post.show');
+
+
 Route::view('/', 'home.index')->name('home');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login.index');
@@ -37,7 +43,11 @@ Route::get('/blog/{posts}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::get('/first', [FirstController::class, 'index'])->name('first.index');
 Route::get('/main', [MainController::class, 'index'])->name('main.index');
-Route::get('/posts', [PostController::class, 'index'])->name('post.index');
+
+
+
+
+
 Route::get('/date', [DateController::class, 'index'])->name('date.index');
 Route::get('/article', [ArticleController::class, 'index'])->name('article.index');
 
