@@ -3,7 +3,12 @@
 @section('page.title', 'Posts')
 
 @section('content')
-<h3 class="text-center">Список статей</h3>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h3 class="text-center">Список статей</h3>
+        <a class='fs-3' href="{{ route('home.index') }}">Добавить статью</a>
+
+    </div>
+
         <div class="row">
             @foreach($posts as $post)
             <div class="col-4">
