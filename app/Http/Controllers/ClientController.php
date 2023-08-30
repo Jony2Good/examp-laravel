@@ -29,7 +29,8 @@ class ClientController extends Controller
            'last_name' => 'string',
            'email' => 'email',
            'phone' => 'string',
-           'address' => 'string'
+           'address' => 'string',
+           'company' => 'string',
        ]);
         Client::create($data);
         return redirect()->route('client.index');

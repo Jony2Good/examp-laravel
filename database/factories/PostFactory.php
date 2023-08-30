@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -25,7 +26,7 @@ class PostFactory extends Factory
             'image' => $b,
             'likes' => fake()->randomNumber(1, 100),
             'is_published' => fake()->boolean(),
-
+            'category_id' => Category::all()->random()->category_id,
         ];
     }
 }

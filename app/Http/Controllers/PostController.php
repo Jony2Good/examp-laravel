@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\PostTag;
+use App\Models\Tag;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -12,6 +15,13 @@ use Illuminate\Validation\Rules\File;
 
 class PostController extends Controller
 {
+
+    public function home()
+    {
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('home.index', compact('categories', 'tags'));
+    }
     public function index()
     {
         $posts = Post::all();
@@ -28,21 +38,28 @@ class PostController extends Controller
 
     public function store()
     {
-        request()->validate([
-            'title' => 'string',
-            'content' => 'string',
-            'image' => ['required', File::types(['png', 'jpg'])],
+        $d = request()->validate([
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'image' => '',
+            'category_id' => '',
+            'tags' => '',
         ]);
+        $tags = $d['tags'];
 
-        $data = request()->only(['title', 'content']);
+        unset($d['tags'], $d['image']);
 
-        Post::create($data);
+        $post = Post::create($d);
+        $post->tags()->attach($tags);
+
         return redirect()->route('post.index');
     }
 
     public function edit(Post $id)
     {
-        return view('posts.edit', compact('id'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('posts.edit', compact('id', 'categories', 'tags'));
     }
 
     public function update(Post $id)
@@ -50,15 +67,20 @@ class PostController extends Controller
         $data = request()->validate([
             'title' => 'string',
             'content' => 'string',
+            'category_id' => '',
+            'tags' => '',
         ]);
+        $tags = $data['tags'];
+        unset($data['tags']);
 
         $id->update($data);
+        $id->tags()->sync($tags);
         return redirect()->route('post.show', $id->id);
     }
 
     public function destroy(Post $id)
     {
-       Post::find($id->id)->delete();
-       return redirect()->route('post.index');
+        Post::find($id->id)->delete();
+        return redirect()->route('post.index');
     }
 }

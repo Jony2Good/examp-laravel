@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'home.index')->name('home.index');
+Route::get('/', [PostController::class, 'home'])->name('home.index');
 
 //PostController
 Route::get('/posts', [PostController::class, 'index'])->name('post.index');
