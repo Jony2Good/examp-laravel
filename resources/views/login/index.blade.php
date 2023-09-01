@@ -1,6 +1,6 @@
-@extends('layouts.auth')
+@extends('layouts.index')
 @section('page.title', 'Страница входа')
-@section('content.auth')
+@section('content')
     <x-card>
         <x-card-container>
             <x-card-header>
@@ -10,14 +10,9 @@
                 <x-slot name="right">
                     <a class="reg-link link-primary" href="{{ route('registration.index') }}">{{__('Регистрация')}}</a>
                 </x-slot>
-                <ul class="social-links text-center">
-                    <li><a href=""><i class="fab fa-google"></i></a></li>
-                    <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                </ul>
             </x-card-header>
-            <x-card-form action="{{ route('login.store') }}" method="post" class="form-horizontal">
-                   <x-form-item>
+            <x-card-form action="" method="post" class="form-horizontal">
+                <x-form-item>
                     <x-form-label required for="email1"> {{__('Адрес эл.почты')}}</x-form-label>
                     <x-form-input id="email1" type="email" placeholder="Эл.почта"/>
                 </x-form-item>
@@ -28,11 +23,11 @@
                 </x-form-item>
 
                 <x-form-item>
-                   <x-checkbox name="remember">
+                    <x-checkbox name="remember">
                         {{ __("Запомнить меня") }}
                     </x-checkbox>
                 </x-form-item>
-                <div class="text-center">
+                <div class="text-start">
                     <x-form-button>
                         {{__('Войти')}}
                     </x-form-button>
