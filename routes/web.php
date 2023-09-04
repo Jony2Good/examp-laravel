@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ClientController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Post\IndexController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegistrationController;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +48,39 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin'], function () {
     });
 });
 
+
+Route::name('user.')->group(function () {
+    Route::view('/private', 'private.private')->middleware('auth')->name('private');
+
+    //страница входа имя роута: user.login.index. Страница view: папка login файл index
+    Route::get('/login', function () {
+        if(Auth::check()) {
+            return redirect(route('user.private'));
+        }
+        return view('login.index');
+    })->name('login');
+
+    //страница регистрации имя роута: user.registration.index. Страница view: папка registration файл index
+    Route::get('/registration', function () {
+        if(Auth::check()) {
+            return redirect(route('user.private'));
+        }
+       return view('registration.index');
+    })->name('registration');
+
+    //отправка формы на контроллер
+    Route::post('/registration', [RegistrationController::class, 'save']);
+    Route::post('/login', [LoginController::class, 'login']);
+
+    Route::get('/logout', function () {
+        Auth::logout();
+        return redirect(route('home.index'));
+    })->name('logout');
+
+
+});
+
+
 //ClientController
 Route::get('/client', [ClientController::class, 'index'])->name('client.index');
 Route::get('/client/{client}', [ClientController::class, 'show'])->name('client.show');
@@ -54,37 +89,6 @@ Route::get('/client/{client}/edit', [ClientController::class, 'edit'])->name('cl
 Route::patch('/client/{client}', [ClientController::class, 'update'])->name('client.update');
 Route::delete('/client/{client}', [ClientController::class, 'destroy'])->name('client.delete');
 
-//AUTH
-Route::get('/registration', [RegistrationController::class, 'index'])->name('registration.index');
-Route::get('/login', [LoginController::class, 'index'])->name('login.index');
-//
-//
-//Route::post('/login/post', [LoginController::class, 'store'])->name('login.store');
-
-//
-//Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
-//Route::get('/blog/{posts}', [BlogController::class, 'show'])->name('blog.show');
-//
-//
-//
-//Route::get('/first', [FirstController::class, 'index'])->name('first.index');
-//Route::get('/main', [MainController::class, 'index'])->name('main.index');
-
-
-
-
-//
-//Route::get('/date', [DateController::class, 'index'])->name('date.index');
-//Route::get('/article', [ArticleController::class, 'index'])->name('article.index');
-
-//Route::get('/posts/create', [PostController::class, 'create']);
-//Route::get('/posts/update', [PostController::class, 'update']);
-//Route::get('/posts/delete', [PostController::class, 'delete']);
-//Route::get('/posts/first', [PostController::class, 'firstOrCreate']);
-//Route::get('/posts/restore/{id}', [PostController::class, 'restore']);
-
-
-//Route::get('/author', [AuthorController::class, 'create']);
 
 
 

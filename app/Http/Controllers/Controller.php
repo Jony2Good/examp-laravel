@@ -11,8 +11,5 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function getData()
-    {
-        return Post::all();
-    }
+
 }

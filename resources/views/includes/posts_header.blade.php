@@ -28,11 +28,11 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page"
-                           href="{{ route('registration.index') }}">{{__('Регистрация')}}</a>
+                           href="{{ route('user.registration') }}">{{__('Регистрация')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           href="{{ route('login.index') }}">{{__('Вход')}}</a>
+                           href="{{ route('user.login') }}">{{__('Вход')}}</a>
                     </li>
                 </ul>
             </div>
